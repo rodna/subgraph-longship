@@ -1,0 +1,89 @@
+type DepositMade @entity(immutable: true) {
+  id: Bytes!
+  underlying_added: BigInt! # uint256
+  tokens_minted: BigInt! # uint256
+  depositor: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type DepositWithdrawn @entity(immutable: true) {
+  id: Bytes!
+  underlying_withdrawn: BigInt! # uint256
+  tokens_burned: BigInt! # uint256
+  depositor: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type LongChomped @entity(immutable: true) {
+  id: Bytes!
+  nonce: BigInt! # uint256
+  roundId: BigInt! # uint80
+  chomper: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type LongClosed @entity(immutable: true) {
+  id: Bytes!
+  nonce: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type LongLiquidatedBankruptcy @entity(immutable: true) {
+  id: Bytes!
+  nonce: BigInt! # uint256
+  liquidator: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type LongOpened @entity(immutable: true) {
+  id: Bytes!
+  nonce: BigInt! # uint256
+  liq_price: BigInt! # uint128
+  leverage: BigInt! # uint128
+  collateral: BigInt! # uint128
+  expiry: BigInt! # uint64
+  holder: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RepoChomped @entity(immutable: true) {
+  id: Bytes!
+  nonce: BigInt! # uint256
+  chomper: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RepoOpened @entity(immutable: true) {
+  id: Bytes!
+  nonce: BigInt! # uint256
+  repo_amount: BigInt! # uint128
+  underlying_quantity: BigInt! # uint128
+  expiry: BigInt! # uint64
+  bankruptcy_payout: BigInt! # uint128
+  holder: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RepoRedeemed @entity(immutable: true) {
+  id: Bytes!
+  nonce: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

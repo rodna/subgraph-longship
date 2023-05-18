@@ -1,0 +1,48 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: longshipMatic
+    network: matic
+    source:
+      address: "0xBc786b70b8dC1d189a5b5BaF1F1d1BCfAAeD9182"
+      abi: longshipMatic
+      startBlock: 42582899
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - DepositMade
+        - DepositWithdrawn
+        - LongChomped
+        - LongClosed
+        - LongLiquidatedBankruptcy
+        - LongOpened
+        - RepoChomped
+        - RepoOpened
+        - RepoRedeemed
+      abis:
+        - name: longshipMatic
+          file: ./abis/longshipMatic.json
+      eventHandlers:
+        - event: DepositMade(uint256,uint256,address)
+          handler: handleDepositMade
+        - event: DepositWithdrawn(uint256,uint256,address)
+          handler: handleDepositWithdrawn
+        - event: LongChomped(uint256,uint80,address)
+          handler: handleLongChomped
+        - event: LongClosed(uint256)
+          handler: handleLongClosed
+        - event: LongLiquidatedBankruptcy(uint256,address)
+          handler: handleLongLiquidatedBankruptcy
+        - event: LongOpened(indexed uint256,uint128,uint128,uint128,uint64,address)
+          handler: handleLongOpened
+        - event: RepoChomped(uint256,address)
+          handler: handleRepoChomped
+        - event: RepoOpened(indexed uint256,uint128,uint128,uint64,uint128,address)
+          handler: handleRepoOpened
+        - event: RepoRedeemed(uint256)
+          handler: handleRepoRedeemed
+      file: ./src/longship-matic.ts
