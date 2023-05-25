@@ -16,6 +16,7 @@ import {
   LongClosed,
   LongLiquidatedBankruptcy,
   LongOpened,
+  Long,
   RepoChomped,
   RepoOpened,
   RepoRedeemed
@@ -77,7 +78,15 @@ export function handleLongClosed(event: LongClosedEvent): void {
   entity.transactionHash = event.transaction.hash
 
   entity.save()
+
+  let id = event.params.nonce.toHex()
+  let entity3 = Long.load(id)
+  if (entity3 != null) {
+    entity3.closed = true
+    entity3.save()
+  }
 }
+
 
 export function handleLongLiquidatedBankruptcy(
   event: LongLiquidatedBankruptcyEvent
@@ -111,6 +120,15 @@ export function handleLongOpened(event: LongOpenedEvent): void {
   entity.transactionHash = event.transaction.hash
 
   entity.save()
+
+  let entity2 = new Long(
+    event.params.nonce.toHex()
+  )
+  entity2.nonce = event.params.nonce
+  entity2.expiry = event.params.expiry
+  entity2.liq_price = event.params.liq_price
+  entity2.closed = false
+  entity2.save()
 }
 
 export function handleRepoChomped(event: RepoChompedEvent): void {

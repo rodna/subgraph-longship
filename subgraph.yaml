@@ -33,12 +33,12 @@ dataSources:
           handler: handleDepositWithdrawn
         - event: LongChomped(uint256,uint80,address)
           handler: handleLongChomped
+        - event: LongOpened(indexed uint256,uint128,uint128,uint128,uint64,address)
+          handler: handleLongOpened
         - event: LongClosed(uint256)
           handler: handleLongClosed
         - event: LongLiquidatedBankruptcy(uint256,address)
           handler: handleLongLiquidatedBankruptcy
-        - event: LongOpened(indexed uint256,uint128,uint128,uint128,uint64,address)
-          handler: handleLongOpened
         - event: RepoChomped(uint256,address)
           handler: handleRepoChomped
         - event: RepoOpened(indexed uint256,uint128,uint128,uint64,uint128,address)

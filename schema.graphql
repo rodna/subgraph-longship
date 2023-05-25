@@ -87,3 +87,11 @@ type RepoRedeemed @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+
+type Long @entity{
+  id: String!
+  nonce: BigInt! # uint256
+  liq_price: BigInt! # uint128
+  expiry: BigInt! # uint64
+  closed: Boolean
+}
